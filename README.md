@@ -30,33 +30,30 @@ import * as hFSM from 'https://cdn.jsdelivr.net/gh/mreinstein/hierarchical/src/i
 
 
 const machineDefinition = {
-	id: 'test machine',
-	initial: 'a',
-	states: {
-		a: {
-			on: {
-			// maybe a good convention to use: https://stately.ai/docs/transitions#cheatsheet-transition-targets
-				jump: 'd.e',
-			},
-			entry: function (context) { },
-			exit: function (context) { },
-			tick: function (context) { },
-			states: {
-				b: {
-					on: {
-						toggle: 'a.b.d.e'
-					},
-					states: {
-						c: {
-
-						}
-					}
-				},
-				d: { }, // contains sub-state e
-			}
-		},
-		f: { ... },  // contains sub-state g
-	}
+    id: 'test machine',
+    initial: 'a',
+    states: {
+        a: {
+            on: {
+                jump: 'd.e',
+            },
+            entry: function (context) { },
+            exit: function (context) { },
+            tick: function (context) { },
+            states: {
+                b: {
+                    on: {
+                        toggle: 'a.b.d.e'
+                    },
+                    states: {
+                        c: { }
+                    }
+                },
+                d: { }, // contains sub-state e
+            }
+        },
+        f: { ... },  // contains sub-state g
+    }
 }
 
 const m = hFSM.create(machineDefinition)  // creates a new machine
