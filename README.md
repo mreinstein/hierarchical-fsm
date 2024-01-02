@@ -26,7 +26,7 @@ These tests will print nothing and return an exit code of 0 on success, or they'
 ## Usage
 
 ```javascript
-import * as hFSM from 'https://cdn.jsdelivr.net/gh/mreinstein/hierarchical/src/index.js'
+import * as hFSM from 'https://cdn.jsdelivr.net/gh/mreinstein/hierarchical-fsm/src/index.js'
 
 
 const machineDefinition = {
