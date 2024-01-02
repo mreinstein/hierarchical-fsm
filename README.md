@@ -7,8 +7,9 @@ All javascript state machine implementations I've encountered fail at least one 
 * has hierarchical machine support
 * is data-oriented
 * is simple/minimalistic
+* has tests
 
-So here we are. A complete hierarchical FSM in ~100 lines of code
+So here we are. A complete hierarchical FSM in ~250 lines of code
 
 
 ## Testing
