@@ -34,8 +34,9 @@ const machineDefinition = {
     initial: 'a',
     states: {
         a: {
+            initial: 'b',
             on: {
-                jump: 'd.e',
+                JUMP: 'd.e',
             },
             entry: function (context) { },
             exit: function (context) { },
@@ -43,7 +44,7 @@ const machineDefinition = {
             states: {
                 b: {
                     on: {
-                        toggle: 'a.b.d.e'
+                        RUN: 'a.b.d.e'
                     },
                     states: {
                         c: { }
