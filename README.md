@@ -6,9 +6,8 @@ All javascript state machine implementations I've encountered fail at least one 
 
 * has hierarchical machine support
 * **provides a tick() function to use in sim/game loops**
-* is data-oriented
-* is simple/minimalistic
 * has tests
+* is simple/minimalistic
 
 So here we are. A complete hierarchical FSM in ~250 lines of code
 

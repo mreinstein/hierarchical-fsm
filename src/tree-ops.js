@@ -43,6 +43,7 @@ export function getStatePath (machine, state) {
 
 
 export function getStateFromPath (machine, path) {
+	path = path.slice(0) // copy it to avoid modifying
 	let state = machine
 	while (path.length) {
 		state = state.states[path.shift()]
@@ -60,29 +61,33 @@ export function buildInvocationList (machine, startPath, endPath) {
 	// find the root node that is a parent of both the start and end paths
 	let root = getCommonRoot(startPath, endPath)
 
-	if (root) {
+	const walkDownPath = endPath.slice(root.length)
 
-		const walkDownPath = endPath.slice(root.length)
+	const rootStr = root.join('.')
 
-		root = getStateFromPath(machine, root)
+	let state
 
-		// walk up from start path to root
-		let state = getStateFromPath(machine, startPath)
+	// copy the array so we don't modify it
+	const start = startPath.slice(0)
 
-		while (state && getStatePath(machine, state).join('.') !== getStatePath(machine, root).join('.')) {
-			if (state.exit)
-				invocationList.push(state.exit)
+	// walk up until we reach the root node
+	while (rootStr !== start.join('.')) {
 
-			state = getParentState(machine, state)
-		}
-		
-		// walk down from root to end path
-		while (state && walkDownPath.length) {
-			const next = walkDownPath.shift()
-			state = state.states[next]
-			if (state?.entry)
-				invocationList.push(state.entry)
-		}
+		state = getStateFromPath(machine, start)
+
+		if (state.exit)
+			invocationList.push(state.exit)
+
+		start.pop()
+	}
+
+	state = getStateFromPath(machine, root)
+	
+	while (walkDownPath.length) {
+		const next = walkDownPath.shift()
+		state = state.states[next]
+		if (state?.entry)
+			invocationList.push(state.entry) 
 	}
 
 	return invocationList

@@ -74,6 +74,7 @@ export function raiseEvent (eventName, machine, context={}) {
 			const startPath = TreeOps.getStatePath(machine.definition, machine.state)
 
 			invocationList = TreeOps.buildInvocationList(machine.definition, startPath, endPath)
+
 			newState = TreeOps.getStateFromPath(machine.definition, endPath)
 			break
 		}

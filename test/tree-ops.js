@@ -243,3 +243,32 @@ import * as hFSM    from '../src/index.js'
 		machineDef.states.a.states.d.states.e.entry
 	])
 }
+
+
+// basic entry, exit actions
+{
+	const machineDef = {
+		id: 'test machine',
+		initial: 'idle',
+		states: {
+			idle: {
+				on: {
+					MOVE: 'move'
+				},
+				entry: function (context) { },
+				exit: function (context) { },
+			},
+			move: {
+				entry: function (context) { },
+				exit: function (context) { },
+			}
+		}
+	}
+
+	const result = TreeOps.buildInvocationList(machineDef, [ 'idle' ], [ 'move' ])
+
+	assert.deepEqual(result, [
+		machineDef.states.idle.exit,
+		machineDef.states.move.entry
+	])
+}

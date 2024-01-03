@@ -131,7 +131,7 @@ import * as hFSM from '../src/index.js'
 					b: {
 						on: {
 							FLY: 'a.d',
-						}
+						},
 						entry: function (context) { invocationList.push(`b:entry:count${context.count}`) },
 						exit: function (context) { invocationList.push('b:exit') },
 					}, // contains sub-state c
@@ -163,4 +163,37 @@ import * as hFSM from '../src/index.js'
 	assert.deepEqual(invocationList, [ 'b:exit' ])
 	assert.equal(m.state, machineDef.states.a.states.d)
 	assert.equal(m.lastState, machineDef.states.a.states.b)
+}
+
+
+// basic entry, exit actions
+{
+	const invocationList = [ ]
+
+	const machineDef = {
+		id: 'test machine',
+		initial: 'idle',
+		states: {
+			idle: {
+				on: {
+					MOVE: 'move'
+				},
+				entry: function (context) { invocationList.push('idle:entry') },
+				exit: function (context) { invocationList.push('idle:exit') },
+			},
+			move: {
+				entry: function (context) { invocationList.push('move:entry') },
+				exit: function (context) { invocationList.push('move:exit') },
+			}
+		}
+	}
+
+
+	const m = hFSM.create(machineDef)
+
+	hFSM.init(m)
+
+	hFSM.raiseEvent('MOVE', m)
+
+	assert.deepEqual(invocationList, [ 'idle:entry', 'idle:exit', 'move:entry' ])
 }
