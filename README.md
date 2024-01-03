@@ -5,6 +5,7 @@ data-oriented hierarchical finite state machines
 All javascript state machine implementations I've encountered fail at least one of these criteria:
 
 * has hierarchical machine support
+* **provides a tick() function to use in sim/game loops**
 * is data-oriented
 * is simple/minimalistic
 * has tests
