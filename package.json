@@ -1,0 +1,33 @@
+{
+  "name": "@uppity/fsm",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "A hierarchical finite state machine",
+  "main": "src/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mreinstein/hierarchical-fsm.git"
+  },
+  "keywords": [
+    "fsm",
+    "hierarchical",
+    "finite",
+    "state",
+    "machine"
+  ],
+  "author": "Michael Reinstein",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mreinstein/hierarchical-fsm/issues"
+  },
+  "homepage": "https://github.com/mreinstein/hierarchical-fsm#readme",
+  "dependencies": {
+    "cycle": "^1.0.3"
+  }
+}

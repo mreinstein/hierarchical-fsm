@@ -1,5 +1,5 @@
 import * as TreeOps         from './tree-ops.js'
-import { default as Cycle } from 'https://cdn.skypack.dev/pin/cycle@v1.0.3-X99glrELi1owpzS7yHye/mode=imports,min/optimized/cycle.js'
+import { default as Cycle } from 'cycle'
 
 
 export function create (definition) {
