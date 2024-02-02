@@ -1,5 +1,4 @@
-import * as TreeOps         from './tree-ops.js'
-import { default as Cycle } from 'cycle'
+import * as TreeOps from './tree-ops.js'
 
 
 export function create (definition) {
@@ -111,14 +110,3 @@ export function tick (machine, context) {
 	machine.state?.tick?.(context)
 }
 
-
-// convert the in-memory object to a JSON compatible representation (JSON can't store circular refs)
-export function serialize (input) {
-    return Cycle.decycle(input)
-}
-
-
-// take the JSON and restore the in-memory version with cycles included
-export function deserialize (input) {
-    return Cycle.retrocycle(input)
-}
