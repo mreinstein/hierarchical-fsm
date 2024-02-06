@@ -53,7 +53,7 @@ const machineDefinition = {
                 d: { }, // contains sub-state e
             }
         },
-        f: { ... },  // contains sub-state g
+        f: { ... }
     }
 }
 
@@ -72,3 +72,26 @@ hFSM.tick(m, context)
 
 ```
 
+
+### ANY state
+sometimes you want to specify "regardless of current state, an event should always transtions to this new state".
+You can do this with the `ANY` state at the top of the machine definition:
+
+```javascript
+const machineDefinition = {
+    id: 'test machine',
+    initial: 'a',
+    states: {
+        ANY: {
+            on: {
+                'SLEEP': 'resting'
+            }
+        },
+        a: { ... },
+        b: { ... },
+        resting: { ... }
+    }
+}
+```
+
+When a `SLEEP` event is received, this machine will transition from the `a` OR `b` state to the `resting` state.

@@ -54,7 +54,7 @@ export function raiseEvent (eventName, machine, context={}) {
 	let state = machine.state
 
 	while (state) {
-		const target = state.on?.[eventName]
+		const target = state.on?.[eventName] || machine.definition.states.ANY?.on?.[eventName]
 
 		if (!target) {
 			// event not found in current state, bubble up to check the parent

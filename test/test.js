@@ -197,3 +197,58 @@ import * as hFSM from '../src/index.js'
 
 	assert.deepEqual(invocationList, [ 'idle:entry', 'idle:exit', 'move:entry' ])
 }
+
+
+// events specified as ANY state will transition to the new state from any state
+{
+	const invocationList = [ ]
+
+	const machineDef = {
+		id: 'test machine',
+		initial: 'idle',
+		states: {
+			ANY: {
+				on: {
+					DEATH: 'dead',
+				}
+			},
+			idle: {
+				on: {
+					MOVE: 'move'
+				},
+				entry: function (context) { invocationList.push('idle:entry') },
+				exit: function (context) { invocationList.push('idle:exit') },
+			},
+			move: {
+				entry: function (context) { invocationList.push('move:entry') },
+				exit: function (context) { invocationList.push('move:exit') },
+			},
+			dead: {
+				entry: function (context) {
+					invocationList.push('dead:entry')
+				}
+			}
+		}
+	}
+
+	const m = hFSM.create(machineDef)
+
+	hFSM.init(m)
+
+	hFSM.raiseEvent('DEATH', m)
+
+	assert.deepEqual(invocationList, [ 'idle:entry', 'idle:exit', 'dead:entry' ])
+
+
+	// now try it from another state
+	invocationList.length = 0
+	machineDef.initial = 'move'
+	const m2 = hFSM.create(machineDef)
+
+	hFSM.init(m2)
+
+	hFSM.raiseEvent('DEATH', m2)
+
+	assert.deepEqual(invocationList, [ 'move:entry', 'move:exit', 'dead:entry' ])
+
+}
