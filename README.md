@@ -44,7 +44,7 @@ const machineDefinition = {
             states: {
                 b: {
                     on: {
-                        RUN: 'a.b.d.e'
+                        RUN: 'a.d.e'
                     },
                     states: {
                         c: { }
