@@ -1,5 +1,5 @@
 {
-  "name": "@uppity/fsm",
+  "name": "@footgun/fsm",
   "version": "0.3.0",
   "type": "module",
   "description": "A hierarchical finite state machine",
