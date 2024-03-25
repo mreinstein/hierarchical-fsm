@@ -58,7 +58,7 @@ export function raiseEvent (eventName, machine, context={}) {
 
 		if (!target) {
 			// event not found in current state, bubble up to check the parent
-			state = TreeOps.getParentState(state)
+			state = TreeOps.getParentState(machine.definition, state)
 		} else {
 			// current state handles this event, transition to the target state
 			let endPath = target.split('.') // converts 'a.d.e' -> [ 'a', 'd', 'e' ]
